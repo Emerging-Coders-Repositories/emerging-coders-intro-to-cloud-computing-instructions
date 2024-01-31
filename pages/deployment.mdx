@@ -1,0 +1,41 @@
+# Deploying Your Server
+
+To deploy our `Node.js` server, we have a large variety of options to choose from. We can use a cloud provider like `AWS`, `Google Cloud`, or `Azure`. We can also use a platform like `Heroku` or `Netlify`. We can also use a service like `Vercel` or `Glitch`. The choice is yours.
+
+For the purposes of this tutorial and to keep things simple, we will be using [Render](https://render.com/) to deploy our server. Render is a cloud provider that makes it easy to deploy your applications and databases. It is a great choice for deploying `Node.js` servers. For their free tier, your server will be put to sleep after 1 hour of inactivity, but it will wake up again when it receives a request. This is a great option for small projects and for learning purposes.
+
+To deploy our server to Render, we will need to create an account and then create a new `Web Service` for our server. We will then need to connect our GitHub repository to our Render account and deploy our server.
+
+### Step 1: Create a Render Account
+
+To create a Render account, go to [Render](https://render.com/) and click on the `Sign Up` button. You can sign up using your GitHub account or your email address.
+
+### Step 2: Create a New Web Service
+
+Once you have created your Render account, you will be taken to your dashboard. Click on the `Create a New Service` button. You will be asked to select a type of service. Select `Web Service` and click on the `Next` button.
+
+You will then be asked to connect your GitHub account to Render. Click on the `Connect to GitHub` button and follow the instructions to connect your GitHub account to Render.
+
+### Step 3: Configure Your Web Service
+
+After you have connected your GitHub account to Render, you will be asked to configure your web service. You will need to select the repository that you want to deploy. Select the repository that contains your `Node.js` server and click on the `Next` button.
+
+You will then be asked to configure your web service. You will need to enter a name for your service, a start command, and a port. Enter the following information:
+
+- **Name**: Enter a name for your service. This can be anything you want.
+- **Start Command**: Enter `npm start` as the start command.
+- **Port**: Enter `3000` as the port.
+
+After you have entered this information, click on the `Next` button.
+
+### Step 4: Deploy Your Web Service
+
+After you have configured your web service, you will be asked to deploy your service. Click on the `Deploy Your Service` button to deploy your server.
+
+Render will now deploy your server. This may take a few minutes. Once your server has been deployed, you will be given a URL for your server. You can use this URL to access your server from anywhere in the world.
+
+### Step 5: Test Your Server
+
+To test your server, open a web browser and enter the URL for your server. You should see the message `Hello, World!` displayed in your web browser. This means that your server is working correctly.
+
+Congratulations! You have successfully deployed your `Node.js` server to Render and completed this tutorial. We hope that we were able to help you learn how to create and deploy a `Node.js` server. If you have any questions or need further assistance, please feel free to ask.

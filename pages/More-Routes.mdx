@@ -1,0 +1,143 @@
+# Dynamic and Parameter Routing
+
+## Dynamic Routing
+Dynamic routing is a way to route requests to different controllers based on the URL. This is useful when you have a lot of similar routes that only differ by a single parameter. For example, if you have a blog and you want to route requests to different blog posts based on the URL, you can use dynamic routing.
+
+To use dynamic routing, you need to define a route with a parameter in the URL. You can define a parameter by using a colon followed by the parameter name. For example, if you want to define a route that takes a `:id` parameter, you can define it like this:
+
+```ruby
+get '/posts/:id' => 'posts#show'
+```
+
+This is useful because if you have a database of blog posts, you can use the `:id` parameter to look up the post in the database and display it. This makes it easy to add new blog posts without having to define a new route for each one.
+
+For our example, we will create a route that will fetch specific data on computer science classes based on their class number. 
+
+To get started, we should add 2 new directories to the root directory of our project. The first directory will be called `controllers` and the second directory will be called `routes`. 
+
+In the `controllers` directory, we will create a new file called `classes_controller.js`. In this file, we will define a new class called `ClassesController` and add a method called `show` that will fetch the data for a specific class based on the class number. 
+
+To get started, go to your `classes_controller.js` file and add the following code to the top of the file:
+
+```javascript
+classes = [
+    {id: 1, name: "Intro to Computer Programming", number: 110, department: "Computer Science", instructor: "Bain", meets: "MWF", time: "10 - 10:50}
+    {id: 2, name: "Fundamentals of Computer Programming 1, number: 111, department: "Computer Science", instructor: "Sood", meets: "MWF", time: "11 - 11:50}
+    {id: 3, name: "Fundamentals of Computer Programming 1.5, number: 150, department: "Computer Science", instructor: "Kurdia", meets: "MWF", time: "11: 11:50}
+    {id: 4, name: "Fundamentals of Computer Programming 2, number: 211, department: "Computer Science", instructor: "Hummel", meets: "TuTh", time: "9:30 - 10:50}
+    {id: 5, name: "Data Structures and Algorithms, number: 214, department: "Computer Science", instructor: "Bhagavatula", meets: "TuTh", time: "11 - 12:20}
+    {id: 6, name: "Intro to Computer Systems, number: 213, department: "Computer Science, instructor: "Ghena", meets: "TuTh", time: "2 - 3:20} 
+    {id: 7, name: "Mathematical Foundations of Computer Science Part 1: Discrete mathematics for computer science", number: 212, department: "Computer Science", instructor: "Evert", meets: "MWF", time: "3-3:50"}
+];
+```
+
+This is an array of objects that represent the different CS classes at Northwestern. Each object has an `id`, `name`, `number`, `department`, `instructor`, `meets`, and `time` property. This is the data that we will use to fetch the data for a specific class based on the class number.
+
+Now, we want to define a new class called `ClassesController` and add a method called `show` that will fetch the data for a specific class based on the class number. 
+
+```javascript
+class ClassesController {
+    show(req, res) {
+        const classNumber = req.params.number;
+        const class = classes.find(c => c.number === classNumber);
+        res.json(class);
+    }
+}
+```
+
+One thing to note here is that we are using `req.params.number` to get the class number from the URL. This is how we can access the parameter from the URL in Express. Additionally, notice that we returning a JSON response with the data for the class. 
+
+Now, that we have defined our `ClassesController`, we need to export it so that we can use it in our routes. 
+
+```javascript
+module.exports = ClassesController;
+```
+
+Next, in the `routes` directory, we will create a new file called `classes.js`. In this file, we will define a new route that will use the `ClassesController` to fetch the data for a specific class based on the class number. 
+
+```javascript
+const express = require('express');
+const router = express.Router();
+const ClassesController = require('../controllers/classes_controller');
+```
+
+A couple of things to note here. First, we are requiring the `ClassesController` at the top of the file. This is because we need to use the `ClassesController` to fetch the data for a specific class based on the class number. In theory, you don't have to create a class for this, but it is a good practice to do so.
+
+Now, we can define a new route that will use the `ClassesController` to fetch the data for a specific class based on the class number. 
+
+```javascript
+router.get('/:number', (req, res) => {
+    const classesController = new ClassesController();
+    classesController.show(req, res);
+});
+```
+
+We also need to export the router so that we can use it in our main `app.js` file. 
+
+```javascript
+module.exports = router;
+```
+
+Now, we need to use the `classes` route in our main `app.js` file. This is what our `app.js` file should look like:
+
+```javascript
+const express = require('express');
+const app = express();
+// Add this import 
+const classesRouter = require('./routes/classes');
+
+... // Rest of the original code
+
+app.use('/classes', classesRouter);
+
+... // Rest of the original code
+```
+
+Now, we can test our new route by running our server and making a request to `http://localhost:3000/classes/110`. This should return the data for the class with the number `110`.
+
+With this code, we have created a dynamic route that fetches specific data on computer science classes based on their class number. Good work! 
+
+
+# Optional Challenges
+
+## Challenge 1: Fetch All Classes
+
+For this challenge, try to create a new route that will fetch all of the classes. This route should return an array of all of the classes. 
+
+## Challenge 2: Fetch All Classes for a Student
+
+For this challenge, try to create a new route that will fetch all of the classes for a specific student. This route should take a `:studentId` parameter and return an array of all of the classes for that student.
+
+You can use the following data to test your route:
+
+```javascript
+students = [
+    {id: 1, name: "John Doe", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 2, name: "Jane Doe", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 3, name: "Bob Smith", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 4, name: "Alice Smith", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 5, name: "Charlie Brown", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 6, name: "Lucy Brown", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 7, name: "Linus Brown", classes: [110, 111, 150, 211, 214, 213, 212]}
+];
+```
+
+**Hint**: You can use the `filter` method to filter the classes for a specific student. You will probably also want to create a new `StudentsController` to handle this route.
+
+## Challenge 3: Fetch All Students for a Class
+
+For this challenge, try to create a new route that will fetch all of the students for a specific class. This route should take a `:classNumber` parameter and return an array of all of the students for that class.
+
+You can use the following data to test your route (same as above):
+
+```javascript
+students = [
+    {id: 1, name: "John Doe", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 2, name: "Jane Doe", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 3, name: "Bob Smith", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 4, name: "Alice Smith", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 5, name: "Charlie Brown", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 6, name: "Lucy Brown", classes: [110, 111, 150, 211, 214, 213, 212]},
+    {id: 7, name: "Linus Brown", classes: [110, 111, 150, 211, 214, 213, 212]}
+];
+```

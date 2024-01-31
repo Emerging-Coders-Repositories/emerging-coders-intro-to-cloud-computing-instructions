@@ -1,7 +1,11 @@
 {
   "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "setup": "Setup", 
+  "Basic-Server": "Setting Up a Server", 
+  "Routes": "Routes",
+  "More-Routes": "More Routes",
+  "RESTful-apis": "RESTful APIs",
+  "deployment": "Deployment",
   "about": {
     "title": "About",
     "type": "page"
@@ -9,7 +13,7 @@
   "contact": {
     "title": "Contact ↗",
     "type": "page",
-    "href": "https://twitter.com/shuding_",
+    "href": "https://www.instagram.com/ethanpinedaa/",
     "newWindow": true
   }
 }

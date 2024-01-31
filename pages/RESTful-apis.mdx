@@ -1,0 +1,82 @@
+# RESTful APIs
+
+So far, we have been using the `requests` library to interact with APIs. We have been using the `GET` method to retrieve data from the server. However, there are other HTTP methods that can be used to interact with an API. In this lesson, we will learn about RESTful APIs and how to use the `POST`, `PUT` and `DELETE` methods to interact with an API.
+
+## What is REST?
+
+A RESTful API is an architectural style for an application program interface (API) that uses HTTP requests to access and use data. That data can be used to GET, PUT, POST and DELETE data types. There are 4 main HTTP methods that are used to interact with a RESTful API:
+
+- **GET**: Retrieve data from the server
+- **POST**: Send data to the server
+- **PUT**: Update data on the server
+- **DELETE**: Remove data from the server
+
+## RESTful API Example
+
+Let's say we have a simple RESTful API that allows us to interact with a list of users. We can use the following HTTP methods to interact with the API:
+
+- **GET /users**: Retrieve a list of all users
+- **GET /users/1**: Retrieve user with ID 1
+- **POST /users**: Add a new user
+- **PUT /users/1**: Update user with ID 1
+- **DELETE /users/1**: Delete user with ID 1
+
+## Implementing RESTful APIs
+
+Now, lets started with the implementing some additional HTTP methods to interact with the API we've been using so far. 
+
+### POST Method
+
+Now, let's say that we want to add a new course to the list of computer science courses. We can use the `POST` method to send data to our server or in this case, our array of courses. To do this, we will add a new method to our `classesController` called `addCourse`. This method will take in a course object and add it to the list of courses: 
+
+```javascript
+const addCourse = (req, res) => {
+  const course = req.body;
+  courses.push(course);
+  res.status(201).send(course);
+};
+``` 
+
+In this method, we are using the `req.body` object to retrieve the course object that was sent to the server. We then add the course to the list of courses and send the course back to the client with a status code of 201.
+
+So far, we've implemented the logic of adding a course to the list of courses. Now, we need to add a route to our `classesRouter` that will allow us to send a `POST` request to the server. We can do this by adding a new route to our `classesRouter`:
+
+```javascript
+classesRouter.post('/courses', addCourse);
+```
+
+Notice how we are using the `post` method to add a new route to our `classesRouter`. This route will allow us to send a `POST` request to the server to add a new course to the list of courses.
+
+Since in our `index.js` file we've already mounted the `classesRouter` to the `/api/classes` path, we can now send a `POST` request to the `/api/classes/courses` path to add a new course to the list of courses.
+
+### PUT Method
+
+Now, let's say that we want to update the details of a course. We can use the `PUT` method to update the details of a course. To do this, we will add a new method to our `classesController` called `updateCourse`. This method will take in a course object and update the details of the course with the given ID:
+
+```javascript
+const updateCourse = (req, res) => {
+  const courseId = parseInt(req.params.id);
+  const course = req.body;
+  const index = courses.findIndex((c) => c.id === courseId);
+  courses[index] = course;
+  res.status(200).send(course);
+};
+```
+
+In this method, we are using the `req.params` object to retrieve the ID of the course that we want to update. We then use the `req.body` object to retrieve the updated course object. We then use the `findIndex` method to find the index of the course with the given ID and update the course with the new course object. We then send the updated course back to the client with a status code of 200. Why do we include the status code? The status code is used to indicate the status of the request. In this case, we are using the status code of 200 to indicate that the request was successful. You don't have to include the status code, but it's a good practice to include it.
+
+And same as before, we need to add a new route to our `classesRouter` that will allow us to send a `PUT` request to the server. We can do this by adding a new route to our `classesRouter`:
+
+```javascript
+classesRouter.put('/courses/:id', updateCourse);
+```
+
+### Testing the POST and PUT Methods
+
+Unlike the `get` method, the `post` and `put` methods require a request body to send data to the server. We can use apps such as as [Postmand](https://www.postman.com/) or [Insomnia](https://insomnia.rest/) to send `POST` and `PUT` requests to the server. **Keep in mind that when you send a `POST` or `PUT` request, you need to include a request body with the data that you want to send to the server.** The data should be in JSON format and have the same keys as the course object! 
+
+## Optional Challenges
+
+### Challenge 1
+
+Add a new method to the `classesController` called `deleteCourse`. This method should take in the ID of the course that we want to delete and remove the course with the given ID from the list of courses. You also need to add a new route to the `classesRouter` that will allow us to send a `DELETE` request to the server.

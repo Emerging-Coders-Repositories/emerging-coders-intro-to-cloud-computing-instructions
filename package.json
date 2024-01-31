@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shuding/nextra-docs-template.git"
+    "url": "git+https://github.com/ethanpaneraa/emerging-coders-intro-to-cloud-computing-instructions"
   },
   "author": "Ethan Pineda",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ethanpaneraa/emerging-coders-intro-to-cloud-computing-instructions"
   },
-  "homepage": "https://github.com/shuding/nextra-docs-template#readme",
+  "homepage": "https://github.com/ethanpaneraa/emerging-coders-intro-to-cloud-computing-instructions",
   "dependencies": {
     "next": "^13.0.6",
     "nextra": "latest",

@@ -1,0 +1,51 @@
+# Creating a Node.js Application
+
+## Introduction
+By this point, you should have already have Node.js installed on your computer or be using the Replit environment. If you haven't done so, please refer to the previous lesson on how to install Node.js.
+
+In this page, we will show the steps to creating a Node.js server started. We will also show how to create a simple web page and serve it using the Node.js server.
+
+## Creating a Node.js Server
+To create a Node.js server, we first needed to create a file called `index.js`. This file will contain the code to start the server.
+
+Why `index.js`? This is the default file name that Node.js will look for when starting an application. If you want to use a different file name, you will need to specify the file name when starting the application. If you take a look at the `package.json` file, you will see a property called `main`. This property specifies the entry point of the application. By default, it is set to `index.js`.
+
+Once you have created your `index.js` file, you can start the server by running the following command in the terminal:
+
+```bash
+node index.js
+```
+
+If you are using Replit, you can click on the "Run" button to start the server.
+
+However, at this point nothing will really happen. This is because we haven't written any code to handle requests. Let's write some code to just get a server started.
+
+To start, we need to import the `Express` module. This module is a web framework for Node.js. It provides a set of features to build web applications and APIs. To import the `Express` module, we use the `require` function. The `require` function is used to import modules in Node.js. Here is the code to import the `Express` module:
+
+```javascript
+const express = require('express');
+```
+
+Next, we need to create an instance of the `Express` module. We do this by calling the `express` function. Here is the code to create an instance of the `Express` module:
+
+```javascript
+const app = express();
+```
+
+From here, we just need to define a port for the server to listen to. We do this by calling the `listen` method on the `app` object. Here is the code to define a port for the server to listen to:
+
+```javascript
+const port = 3000;
+```
+
+Now, we can call the `listen` method on the `app` object to start the server. Here is the code to start the server:
+
+```javascript
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+```
+
+Now if you type `node index.js` in the terminal and press enter, you should see the message "Server is running on port 3000" in the terminal. If you are using Replit, you can click on the "Run" button to start the server.
+
+However, if you try to access the server by typing `http://localhost:3000` in the browser, you will get an error message. This is because we haven't defined any routes for the server to handle. We will cover routes in the next lesson.

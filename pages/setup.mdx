@@ -1,0 +1,39 @@
+# Setup
+
+If you don't already have Node.js installed, you can download it from the official website. The download will include npm, which is the package manager for Node.js. You can see the instructions on how to walkthrough the install process by looking at the introduction page. 
+
+1. Initializing a Node.js application with npm
+
+To get started, we need to first navigate to the directory where we want to create our application. Here's an example of how to create a new directory and navigate to it:
+
+```bash
+mkdir myapp
+cd myapp
+```
+From here, you should be inside of the directory you just created. Now we can initialize our Node.js application with npm:
+
+```bash
+npm init
+```
+
+npm init will prompt you to enter some information such as the name, version, description, entry point, test command, git repository, keywords, author, and license. You can press enter to accept the defaults, or you can modify it if you'd like.
+
+If you'll rather not deal with the prompts and just accept the default values, you can just add the -y flag to the npm init command:
+
+```bash
+npm init -y
+```
+
+This will create a package.json file for your application. This file is used to store information about your application. It also includes the list of dependencies to install from npm when running npm install. 
+
+2. Installing Express
+
+Now that we have our Node.js application initialized, we can install Express. To do this, we can use npm again:
+
+```bash
+npm install express
+```
+
+This will install Express in the node_modules directory. You can see the list of dependencies in the package.json file.
+
+This is the basic setup for creating a Node.js application with Express. This is also all you need to get started with creating a RESTFul API using express. We will now begin to walkthrough the process of creating a simple RESTFul API using Express.
