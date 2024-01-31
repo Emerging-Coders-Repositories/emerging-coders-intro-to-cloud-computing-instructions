@@ -30,11 +30,12 @@ Now, lets started with the implementing some additional HTTP methods to interact
 Now, let's say that we want to add a new course to the list of computer science courses. We can use the `POST` method to send data to our server or in this case, our array of courses. To do this, we will add a new method to our `classesController` called `addCourse`. This method will take in a course object and add it to the list of courses: 
 
 ```javascript
-const addCourse = (req, res) => {
-  const course = req.body;
-  courses.push(course);
-  res.status(201).send(course);
-};
+addCourse(req, res) {
+    const newCourse = req.body;
+    classes.push(newCourse);
+    console.log(classes)
+    res.status(201).send(newCourse);
+}
 ``` 
 
 In this method, we are using the `req.body` object to retrieve the course object that was sent to the server. We then add the course to the list of courses and send the course back to the client with a status code of 201.
@@ -42,7 +43,10 @@ In this method, we are using the `req.body` object to retrieve the course object
 So far, we've implemented the logic of adding a course to the list of courses. Now, we need to add a route to our `classesRouter` that will allow us to send a `POST` request to the server. We can do this by adding a new route to our `classesRouter`:
 
 ```javascript
-classesRouter.post('/courses', addCourse);
+router.post("/", (req, res) => {
+    const classesController = new ClassesController();
+    classesController.addCourse(req, res);
+}); 
 ```
 
 Notice how we are using the `post` method to add a new route to our `classesRouter`. This route will allow us to send a `POST` request to the server to add a new course to the list of courses.
@@ -54,13 +58,18 @@ Since in our `index.js` file we've already mounted the `classesRouter` to the `/
 Now, let's say that we want to update the details of a course. We can use the `PUT` method to update the details of a course. To do this, we will add a new method to our `classesController` called `updateCourse`. This method will take in a course object and update the details of the course with the given ID:
 
 ```javascript
-const updateCourse = (req, res) => {
-  const courseId = parseInt(req.params.id);
-  const course = req.body;
-  const index = courses.findIndex((c) => c.id === courseId);
-  courses[index] = course;
-  res.status(200).send(course);
-};
+updateCourse(req, res) {
+    const courseID = parseInt(req.params.id); 
+    const course = classes.find((c) => c.id == courseID);
+    course.name = req.body.name;
+    course.number = req.body.number;
+    course.department = req.body.department;
+    course.instructor = req.body.instructor;
+    course.meets = req.body.meets;
+    course.time = req.body.time;
+    console.log(classes); 
+    res.status(200).send(course);
+}
 ```
 
 In this method, we are using the `req.params` object to retrieve the ID of the course that we want to update. We then use the `req.body` object to retrieve the updated course object. We then use the `findIndex` method to find the index of the course with the given ID and update the course with the new course object. We then send the updated course back to the client with a status code of 200. Why do we include the status code? The status code is used to indicate the status of the request. In this case, we are using the status code of 200 to indicate that the request was successful. You don't have to include the status code, but it's a good practice to include it.
@@ -68,7 +77,10 @@ In this method, we are using the `req.params` object to retrieve the ID of the c
 And same as before, we need to add a new route to our `classesRouter` that will allow us to send a `PUT` request to the server. We can do this by adding a new route to our `classesRouter`:
 
 ```javascript
-classesRouter.put('/courses/:id', updateCourse);
+router.put("/:id", (req, res) => {
+    const classesController = new ClassesController();
+    classesController.updateCourse(req, res);
+}); 
 ```
 
 ### Testing the POST and PUT Methods

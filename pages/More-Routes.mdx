@@ -39,8 +39,8 @@ Now, we want to define a new class called `ClassesController` and add a method c
 class ClassesController {
     show(req, res) {
         const classNumber = req.params.number;
-        const class = classes.find(c => c.number === classNumber);
-        res.json(class);
+        const classInfo = classes.find(c => c.number === classNumber);
+        res.json(classInfo);
     }
 }
 ```
