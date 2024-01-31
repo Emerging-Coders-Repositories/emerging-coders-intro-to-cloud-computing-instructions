@@ -8,7 +8,7 @@ const config: DocsThemeConfig = {
   },
   docsRepositoryBase: 'https://github.com/ethanpaneraa/emerging-coders-intro-to-cloud-computing-instructions',
   footer: {
-    text: 'Nextra Docs Template',
+    text: 'Emerging Coders Intro to Cloud Computing Workshop',
   },
 }
 
